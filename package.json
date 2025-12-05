@@ -2,6 +2,7 @@
   "name": "meal-in-sight",
   "private": true,
   "scripts": {
+    "postinstall": "npm run -w @meal-in-sight/db",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
@@ -20,5 +21,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "prisma": "^6.18.0",
+    "styled-components": "^6.1.19"
+  }
 }

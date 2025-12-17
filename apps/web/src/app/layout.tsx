@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import StyledJsxRegistry from "@/lib/registery";
 import GlobalStyles from "./global-styles";
+import TabBar from "@/layouts/tab-bar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,10 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         <GlobalStyles />
-        <StyledJsxRegistry>{children}</StyledJsxRegistry>
+        <StyledJsxRegistry>
+          {children}
+          <TabBar/>
+        </StyledJsxRegistry>
       </body>
     </html>
   );

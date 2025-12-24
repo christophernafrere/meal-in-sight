@@ -1,40 +1,10 @@
 {
-<<<<<<< Updated upstream
-  "name": "meal-in-sight",
-  "private": true,
-  "scripts": {
-    "postinstall": "npm run -w @meal-in-sight/db",
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
-  },
-  "devDependencies": {
-    "prettier": "^3.6.2",
-    "turbo": "^2.5.8",
-    "typescript": "5.9.2"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "npm@10.9.3",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "dependencies": {
-    "prisma": "^6.18.0",
-    "styled-components": "^6.1.19"
-  }
-=======
     "name": "meal-in-sight",
     "private": true,
     "scripts": {
         "postinstall": "npm run -w @meal-in-sight/db",
         "build": "turbo run build",
         "dev": "turbo run dev",
-        "start": "turbo run start",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "check-types": "turbo run check-types"
@@ -53,10 +23,7 @@
         "packages/*"
     ],
     "dependencies": {
-        "lucide-react": "^0.555.0",
-        "motion": "^12.23.26",
         "prisma": "^6.18.0",
         "styled-components": "^6.1.19"
     }
->>>>>>> Stashed changes
 }

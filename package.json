@@ -23,6 +23,8 @@
     "packages/*"
   ],
   "dependencies": {
+    "lucide-react": "^0.555.0",
+    "motion": "^12.23.26",
     "prisma": "^6.18.0",
     "styled-components": "^6.1.19"
   }

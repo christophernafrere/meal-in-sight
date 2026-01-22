@@ -1,59 +1,17 @@
 'use client';
 import { motion } from 'motion/react';
 import styled from 'styled-components';
-import { RectangleGogglesIcon } from 'lucide-react';
 
-//export default function RecipeCard({ recipe, iteration }: { iteration: number, recipe: Recipe }) {
-export default function RecipeCard({
-    title,
-    imageUrl,
-    difficulty,
-    upvote,
-    ARDisplay,
-    iteration,
-}: {
-    iteration: number;
-    title: string;
-    imageUrl: string;
-    difficulty: number;
-    upvote: number;
-    ARDisplay: boolean;
-}) {
+export default function RecipeCard({ iteration }: { iteration: number }) {
     return (
-        <RecipeCardContainer
-            imageUrl={imageUrl}
-            iteration={iteration}
-            layout
-            initial={{ opacity: 0, x: '-50%', y: '-55%', scale: 0.95 }}
-            animate={{
-                opacity: 1,
-                x: '-50%',
-                y: `${-50 - iteration * 3.8}%`,
-                scale: Math.max(0.8, 1 - iteration * 0.05),
-            }}
-            exit={{ opacity: 0, x: '-150%', rotate: -10 }}
-            transition={{ duration: 0.2 }}
-        >
-            {ARDisplay && (
-                <ARPins>
-                    <RectangleGogglesIcon />
-                </ARPins>
-            )}
-
-            <DescriptionSection>
-                <h2>{title}</h2>
-            </DescriptionSection>
+        <RecipeCardContainer iteration={iteration}>
+            {iteration}
+            <ARPins>AR disponible</ARPins>
         </RecipeCardContainer>
     );
 }
 
-const RecipeCardContainer = styled(motion.article)<{
-    iteration: number;
-    imageUrl: string;
-}>`
-    display: flex;
-    flex-direction: center;
-    align-items: flex-end;
+const RecipeCardContainer = styled(motion.article)<{ iteration: number }>`
     width: 95%;
     height: 90%;
     position: absolute;
@@ -66,16 +24,18 @@ const RecipeCardContainer = styled(motion.article)<{
     /* Pour éviter les surprises d'origine */
     transform-origin: center;
 
+    ${({ iteration }) => {
+        const stepY = 3; // écart vertical entre cartes (px)
+        const stepScale = 0.05; // perte de taille par carte
+        const y = -50 - iteration * stepY; // monte quand iteration augmente
+        const scale = Math.max(0.8, 1 - iteration * stepScale); // 0 la plus grande
+        return `transform: translate(-50%, ${y}%) scale(${scale});`;
+    }}
+
     border-radius: 18px;
     box-shadow: 0 4px 8px black;
     background-color: white;
-    background-image: url(${({ imageUrl }) => imageUrl});
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: hidden;
 `;
-
 const ARPins = styled.p`
     position: absolute;
     top: 0;
@@ -84,16 +44,4 @@ const ARPins = styled.p`
     color: white;
     padding: 4px 8px;
     border-radius: 8px;
-`;
-
-const DescriptionSection = styled.div`
-    width: 100%;
-    height: 10%;
-    color: white;
-    padding: 8px 0;
-    background: linear-gradient(0deg, #000000, 33%, 66%, #000000);
-    padding: 8px 24px;
-    h2 {
-        margin: 0;
-    }
 `;

@@ -11,13 +11,86 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   email     String   @unique
   name      String?
   password  String
   createdAt DateTime @default(now())
+  recipeIDo UserToRecipe[]
+  // createdRecipes   Recipe[]
+  
+}
+
+model Recipe {
+  id  String    @id   @default(uuid())
+  title String  @unique
+  description String
+  alergens  String[]
+  regim String[]
+  globalCalories  Int //kcal
+  globalRate  Int?
+  doBy  UserToRecipe[]
+  createdById String 
+  imageUrl String
+  // createdBy User  @relation(fields: [createdById], references: [id])
+}
+
+model UserToRecipe {
+  userId  String
+  recipeId  String
+  user  User  @relation(fields: [userId], references: [id])
+  recipe  Recipe  @relation(fields: [recipeId], references: [id])
+  rate Int? // 0 -> 5
+  favorite  Boolean @default(false)
+  createdAt DateTime  @default(now())
+  imageUrl String
+  @@id([userId, recipeId])
+}
+
+
+model Ingredient  {
+  id  String  @id   @default(uuid())
+  name  String
+  description String
+  equivalentTo  IngredientEquivalent[] @relation("IngredientToEquivalent")
+  equivalentFrom IngredientEquivalent[] @relation("EquivalentToIngredient")
+  type IngredientType?
+}
+
+model IngredientOnRecipe {
+  recipeId  String  
+  ingredientId  String  
+  quantity  Int
+  baseUnity  Unity
+  @@id([recipeId, ingredientId])
+}
+
+model IngredientEquivalent {
+  ingredientId String
+  equivalentId  String
+  ingredient  Ingredient  @relation("IngredientToEquivalent", fields: [ingredientId], references: [id], onDelete: Cascade)
+  equivalent  Ingredient  @relation("EquivalentToIngredient", fields: [equivalentId], references: [id], onDelete: Cascade)
+  ratio   Float
+  @@id([ingredientId, equivalentId])
+}
+
+enum Regim {
+  omni
+  veggan
+  vegetarian
+}
+
+enum IngredientType {
+  Meat
+  Fish
+  Vegetable
+  Fat
+  Crudity
+}
+enum Unity {
+  Gram
+  Litter
 }

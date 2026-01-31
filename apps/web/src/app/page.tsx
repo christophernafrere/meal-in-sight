@@ -1,6 +1,7 @@
 'use client';
 import ARPopup from '@/components/ARPopup';
 import RecipeCard from '@/components/recipe-card';
+import { Recipe } from '@meal-in-sight/db';
 import { HeartCrack, HeartIcon, StarIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useRouter } from 'next/navigation';

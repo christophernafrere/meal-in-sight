@@ -177,7 +177,7 @@ export default function Home() {
 const HomeContainer = styled.section`
     position: relative;
     width: 95%;
-    height: 65vh;
+    height: 80vh;
     margin: auto;
 
     @media (min-height: 800px) {
@@ -197,6 +197,11 @@ const MenuReaction = styled.div`
     gap: 24px;
     width: 80%;
     height: 15%;
+
+    @media (max-height: 800px) {
+        height: 20%;
+        bottom: -5%;
+    }
 `;
 
 const ActionButton = styled(motion.button)<{

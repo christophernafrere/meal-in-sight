@@ -108,6 +108,9 @@ const RecipeCardContainer = styled(motion.article)<{
     left: 50%;
     top: 50%;
 
+    @media screen {
+    }
+
     /* 0 devant, 1 derrière, 2 encore derrière, ... */
     z-index: ${({ $iteration }) => 100 - $iteration};
 

@@ -1,5 +1,5 @@
-"use client";
-import { createGlobalStyle } from "styled-components";
+'use client';
+import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
     body {
         margin: 0;

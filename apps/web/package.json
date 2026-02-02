@@ -9,8 +9,12 @@
         "lint": "eslint"
     },
     "dependencies": {
-        "@meal-in-sight/db": "workspace:*",
+        "@meal-in-sight/db": "*",
+        "install": "^0.13.0",
+        "lucide-react": "^0.563.0",
+        "motion": "^12.29.2",
         "next": "16.0.0",
+        "npm": "^11.8.0",
         "react": "19.2.0",
         "react-dom": "19.2.0",
         "styled-components": "^6.1.19"

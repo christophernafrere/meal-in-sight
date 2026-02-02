@@ -11,6 +11,8 @@ export default function RecipeCard({
     upvote,
     ARDisplay,
     iteration,
+    exitDirection,
+    isTop,
 }: {
     iteration: number;
     title: string;
@@ -18,20 +20,63 @@ export default function RecipeCard({
     difficulty: number;
     upvote: number;
     ARDisplay: boolean;
+    exitDirection: 'like' | 'favorite' | 'dislike';
+    isTop: boolean;
 }) {
+    const exitStyles = (() => {
+        if (!isTop) {
+            return {
+                opacity: 0,
+                scale: 0.8,
+                translateX: '-50%',
+                translateY: `${-50 - iteration * 3.8}%`,
+            };
+        }
+
+        switch (exitDirection) {
+            case 'dislike':
+                return {
+                    opacity: 0,
+                    translateX: '-180%',
+                    translateY: `${-50 - iteration * 3.8}%`,
+                    rotate: -12,
+                };
+            case 'favorite':
+                return {
+                    opacity: 0,
+                    translateX: '-50%',
+                    translateY: '115%',
+                    scale: 0.9,
+                    rotate: 6,
+                };
+            case 'like':
+            default:
+                return {
+                    opacity: 0,
+                    translateX: '140%',
+                    translateY: `${-50 - iteration * 3.8}%`,
+                    rotate: 10,
+                };
+        }
+    })();
+
     return (
         <RecipeCardContainer
             imageUrl={imageUrl}
             iteration={iteration}
-            layout
-            initial={{ opacity: 0, x: '-50%', y: '-55%', scale: 0.95 }}
+            initial={{
+                opacity: 0,
+                translateX: '-50%',
+                translateY: '-55%',
+                scale: 0.95,
+            }}
             animate={{
                 opacity: 1,
-                x: '-50%',
-                y: `${-50 - iteration * 3.8}%`,
+                translateX: '-50%',
+                translateY: `${-50 - iteration * 3.8}%`,
                 scale: Math.max(0.8, 1 - iteration * 0.05),
             }}
-            exit={{ opacity: 0, x: '-150%', rotate: -10 }}
+            exit={exitStyles}
             transition={{ duration: 0.2 }}
         >
             {ARDisplay && (

@@ -1,105 +1,123 @@
 'use client';
 import ARPopup from '@/components/ARPopup';
 import RecipeCard from '@/components/recipe-card';
-import { Recipe } from '@meal-in-sight/db';
+import { fakeRecipes, RecipeWithIngredients } from '@/data/recipe';
 import { HeartCrack, HeartIcon, StarIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 
-export type FakeRecipeType = {
-    id: number;
-    title: string;
-    imageUrl: string;
-    description: string;
-    upvote: number;
-    difficulty: number;
-    ARDisplay: boolean;
-};
-
 export default function Home() {
-    const router = useRouter();
-    const [recipesList, setRecipesList] = useState<FakeRecipeType[]>([]);
+    const totalRecipes = fakeRecipes.length;
+    const desiredQueueLength = Math.min(3, totalRecipes);
+    const [recipesQueue, setRecipesQueue] = useState<RecipeWithIngredients[]>(
+        () => fakeRecipes.slice(0, desiredQueueLength),
+    );
+    const nextIndexRef = useRef<number>(
+        totalRecipes > 0 ? desiredQueueLength % totalRecipes : 0,
+    );
     const [showARPopup, setShowARPopup] = useState<boolean>(false);
-    const fetchMinimalRecipe = () => {
-        return setRecipesList([
-            ...[
-                {
-                    id: 1,
-                    title: 'Lasagne',
-                    imageUrl:
-                        'https://franco.panzani.com/_ipx/f_webp&q_80&s_1800x1192/https://backend.franco.panzani.com/app/uploads/2024/07/lasagne-classique.jpg',
-                    description:
-                        'Pates fraiches superposees avec sauce bolognaise mijotee, couche de bechamel onctueuse et fromage gratine dore au four.',
-                    difficulty: 2, // sur 3
-                    upvote: 863,
-                    ARDisplay: true,
-                },
-                {
-                    id: 2,
-                    title: 'Risotto de champignon',
-                    imageUrl:
-                        'https://img.cuisineaz.com/660x660/2018/09/25/i142810-risotto-de-champignons-de-paris.jpeg',
-                    description:
-                        'Risotto cremoso aux champignons sauvages, parfume au vin blanc et parmesan, garni de persil frais.',
-                    difficulty: 3, // sur 3
-                    upvote: 240,
-                    ARDisplay: false,
-                },
-                {
-                    id: 3,
-                    title: 'Salade césar',
-                    imageUrl:
-                        'https://florette.fr/wp-content/uploads/2024/08/Salade-cesar-Florette.jpg',
-                    description:
-                        'Salade croquante avec poulet grille, croûtons aillés, copeaux de parmesan et sauce césar onctueuse.',
-                    difficulty: 1, // sur 3
-                    upvote: 540,
-                    ARDisplay: true,
-                },
-            ],
-        ]);
+    const [lastInteractedRecipeId, setLastInteractedRecipeId] = useState<
+        string | null
+    >(null);
+    const [lastSwipeDirection, setLastSwipeDirection] = useState<
+        'like' | 'favorite' | 'dislike'
+    >('dislike');
+
+    const addRecipeToFavorite = (_recipe: RecipeWithIngredients) => {};
+
+    const shiftRecipe = (
+        afterShift?: (recipe: RecipeWithIngredients) => void,
+    ) => {
+        if (recipesQueue.length === 0 || totalRecipes === 0) {
+            return;
+        }
+
+        setRecipesQueue((prev) => {
+            if (prev.length === 0) {
+                return prev;
+            }
+
+            const [current, ...rest] = prev;
+            afterShift?.(current);
+
+            if (desiredQueueLength === 0) {
+                return rest;
+            }
+
+            const updated = [...rest];
+
+            // Refill the deck to keep the stack size stable
+            while (updated.length < desiredQueueLength && totalRecipes > 0) {
+                if (totalRecipes === 1) {
+                    updated.push(fakeRecipes[0]);
+                    break;
+                }
+
+                let appended = false;
+                for (let attempt = 0; attempt < totalRecipes; attempt += 1) {
+                    const nextIndex = nextIndexRef.current % totalRecipes;
+                    nextIndexRef.current =
+                        (nextIndexRef.current + 1) % totalRecipes;
+                    const candidate = fakeRecipes[nextIndex];
+
+                    if (!candidate) {
+                        continue;
+                    }
+
+                    if (
+                        totalRecipes > desiredQueueLength &&
+                        updated.some((recipe) => recipe.id === candidate.id)
+                    ) {
+                        continue;
+                    }
+
+                    updated.push(candidate);
+                    appended = true;
+                    break;
+                }
+
+                if (!appended) {
+                    break;
+                }
+            }
+
+            return updated;
+        });
     };
-    const addRecipeToFavorite = () => {};
 
-    const likeRecipe = async () => {
-        // const currentRecipeId = recipesList[0].id;
-        // try {
-        //     const response = await fetch(
-        //         `https://api.meal-in-sight.fr/recipe/${currentRecipeId}/like`,
-        //         {
-        //             method: 'POST',
-        //         },
-        //     );
-
-        //     if (response.status === 200) {
-        //         setShowARPopup(true);
-        //     }
-        // } catch (error) {
-        //     throw new Error('Internal Server Error');
-        // }
-
-        setShowARPopup(true);
+    const likeRecipe = () => {
+        shiftRecipe((recipe) => {
+            setLastInteractedRecipeId(recipe.id);
+            setShowARPopup(true);
+        });
     };
 
     const swipeAction = (direction: 'like' | 'favorite' | 'dislike') => {
+        if (!recipesQueue.length) {
+            return;
+        }
+
+        setLastSwipeDirection(direction);
+
         if (direction === 'dislike') {
-            setRecipesList((prev) => prev.slice(1));
+            shiftRecipe();
         } else if (direction === 'favorite') {
-            alert('favorite');
+            shiftRecipe((recipe) => {
+                addRecipeToFavorite(recipe);
+            });
         } else if (direction === 'like') {
             likeRecipe();
         }
     };
-    useEffect(() => {
-        fetchMinimalRecipe();
-    }, []);
+
+    const hasRecipes = recipesQueue.length > 0;
+
     return (
         <HomeContainer>
             <RecipeContent>
-                <AnimatePresence initial={false} mode="popLayout">
-                    {recipesList.map((recipe, i) => (
+                <AnimatePresence initial={false}>
+                    {recipesQueue.map((recipe, i) => (
                         <RecipeCard
                             key={recipe.id}
                             title={recipe.title}
@@ -108,6 +126,8 @@ export default function Home() {
                             difficulty={recipe.difficulty}
                             iteration={i}
                             ARDisplay={recipe.ARDisplay}
+                            isTop={i === 0}
+                            exitDirection={lastSwipeDirection}
                         />
                     ))}
                 </AnimatePresence>
@@ -116,27 +136,39 @@ export default function Home() {
                 <ActionButton
                     $type="dislike"
                     onClick={() => swipeAction('dislike')}
+                    disabled={!hasRecipes}
                 >
                     <HeartCrack size={48} />
                 </ActionButton>
                 <ActionButton
                     $type="star"
                     onClick={() => swipeAction('favorite')}
+                    disabled={!hasRecipes}
                 >
                     <StarIcon size={48} />
                 </ActionButton>
-                <ActionButton $type="like" onClick={() => swipeAction('like')}>
+                <ActionButton
+                    $type="like"
+                    onClick={() => swipeAction('like')}
+                    disabled={!hasRecipes}
+                >
                     <HeartIcon size={48} />
                 </ActionButton>
             </MenuReaction>
-            {/* {showARPopup && <ARPopup recipeId={recipesList[0].id.toString()} />} */}
-            {showARPopup && (
+            {showARPopup && lastInteractedRecipeId && (
                 <ARPopup
-                    recipeId={'15'}
+                    recipeId={lastInteractedRecipeId}
                     onClose={() => {
                         setShowARPopup(false);
+                        setLastInteractedRecipeId(null);
                     }}
                 />
+            )}
+            {!hasRecipes && (
+                <EmptyStackMessage>Plus de recettes</EmptyStackMessage>
+            )}
+            {!hasRecipes && (
+                <EmptyStackMessage>Plus de recettes</EmptyStackMessage>
             )}
         </HomeContainer>
     );
@@ -184,6 +216,11 @@ const ActionButton = styled(motion.button)<{
     border: none;
     box-shadow: 0 8px 12px black;
     cursor: pointer;
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
 `;
 
 const RecipeContent = styled.div`
@@ -195,3 +232,12 @@ const RecipeContent = styled.div`
     align-items: center;
 `;
 const ARTags = styled.div``;
+
+const EmptyStackMessage = styled.p`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #666;
+    font-size: 1.2rem;
+`;

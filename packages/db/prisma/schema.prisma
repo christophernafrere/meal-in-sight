@@ -33,9 +33,21 @@ model Recipe {
   globalCalories  Int //kcal
   globalRate  Int?
   doBy  UserToRecipe[]
+  ingredients IngredientOnRecipe[]
+  createdAt DateTime  @default(now())
   createdById String 
   imageUrl String
+  steps RecipeStep[]
   // createdBy User  @relation(fields: [createdById], references: [id])
+}
+
+model RecipeStep {
+  id  String  @id   @default(uuid())
+  recipeId  String
+  recipe  Recipe  @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  stepNumber  Int
+  description String
+  imageUrl String?
 }
 
 model UserToRecipe {
@@ -51,18 +63,22 @@ model UserToRecipe {
 }
 
 
+
 model Ingredient  {
   id  String  @id   @default(uuid())
   name  String
   description String
   equivalentTo  IngredientEquivalent[] @relation("IngredientToEquivalent")
   equivalentFrom IngredientEquivalent[] @relation("EquivalentToIngredient")
+  ingredientOnRecipes  IngredientOnRecipe[]
   type IngredientType?
 }
 
 model IngredientOnRecipe {
   recipeId  String  
-  ingredientId  String  
+  ingredientId  String
+  recipe  Recipe  @relation(fields: [recipeId], references: [id], onDelete: Cascade)  
+  ingredient  Ingredient  @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
   quantity  Int
   baseUnity  Unity
   @@id([recipeId, ingredientId])

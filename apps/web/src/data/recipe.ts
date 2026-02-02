@@ -7,8 +7,15 @@ import {
     Unity,
 } from '@meal-in-sight/db/src/generated/prisma/browser';
 
+export type IngredientWithImage = Ingredient & {
+    imageUrl: string;
+};
+
+export const DEFAULT_INGREDIENT_IMAGE =
+    'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80';
+
 export type IngredientOnRecipeWithIngredient = IngredientOnRecipe & {
-    ingredient: Ingredient;
+    ingredient: IngredientWithImage;
 };
 
 export type RecipeWithIngredients = Recipe & {
@@ -17,6 +24,105 @@ export type RecipeWithIngredients = Recipe & {
     ARDisplay: boolean;
     ingredients: IngredientOnRecipeWithIngredient[];
     steps: RecipeStep[];
+};
+
+const ingredientImages: Record<string, string> = {
+    'ing-pate-lasagne':
+        'https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=800&q=80',
+    'ing-boeuf-hache':
+        'https://images.unsplash.com/photo-1506084868230-bb9d0524087e?auto=format&fit=crop&w=800&q=80',
+    'ing-base-tomate':
+        'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=800&q=80',
+    'ing-bechamel':
+        'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80',
+    'ing-mozzarella':
+        'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+    'ing-riz-arborio':
+        'https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=800&q=80',
+    'ing-bouillon-legumes':
+        'https://images.unsplash.com/photo-1604908177225-d7bad45d0f6c?auto=format&fit=crop&w=800&q=80',
+    'ing-champignons-mixtes':
+        'https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80',
+    'ing-parmesan':
+        'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',
+    'ing-huile-truffe':
+        'https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=800&q=80',
+    'ing-poulet-grille':
+        'https://images.unsplash.com/photo-1514986888952-8cd320577b68?auto=format&fit=crop&w=800&q=80',
+    'ing-romaine':
+        'https://images.unsplash.com/photo-1525054098605-1f75520abe62?auto=format&fit=crop&w=800&q=80',
+    'ing-croutons':
+        'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80',
+    'ing-sauce-cesar':
+        'https://images.unsplash.com/photo-1525755664500-46e53ae66df7?auto=format&fit=crop&w=800&q=80',
+    'ing-pate-curry-vert':
+        'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80',
+    'ing-lait-coco':
+        'https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80',
+    'ing-poulet-blanc':
+        'https://images.unsplash.com/photo-1604908177754-8e948352c322?auto=format&fit=crop&w=800&q=80',
+    'ing-aubergine-thai':
+        'https://images.unsplash.com/photo-1593032465171-8ed95cc8f1d2?auto=format&fit=crop&w=800&q=80',
+    'ing-basilic-thai':
+        'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80',
+    'ing-cabillaud':
+        'https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800&q=80',
+    'ing-tortilla-bleue':
+        'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=800&q=80',
+    'ing-mangue':
+        'https://images.unsplash.com/photo-1502740479091-635887520276?auto=format&fit=crop&w=800&q=80',
+    'ing-creme-sure':
+        'https://images.unsplash.com/photo-1486591978090-5e0baed04ebc?auto=format&fit=crop&w=800&q=80',
+    'ing-chou-rouge':
+        'https://images.unsplash.com/photo-1518976024611-28bf4d975b05?auto=format&fit=crop&w=800&q=80',
+    'ing-tomate-concassee':
+        'https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?auto=format&fit=crop&w=800&q=80',
+    'ing-poivron-rouge':
+        'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=800&q=80',
+    'ing-pois-chiches':
+        'https://images.unsplash.com/photo-1612872087720-bb876e3a3fd6?auto=format&fit=crop&w=800&q=80',
+    'ing-oeuf':
+        'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',
+    'ing-coriandre':
+        'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=800&q=80',
+    'ing-bouillon-miso':
+        'https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?auto=format&fit=crop&w=800&q=80',
+    'ing-nouilles-ramen':
+        'https://images.unsplash.com/photo-1604908177754-8e948352c322?auto=format&fit=crop&w=800&q=80',
+    'ing-porc-chashu':
+        'https://images.unsplash.com/photo-1543357480-c60d0624e0b3?auto=format&fit=crop&w=800&q=80',
+    'ing-menma':
+        'https://images.unsplash.com/photo-1546554137-f86b9593a222?auto=format&fit=crop&w=800&q=80',
+    'ing-quinoa':
+        'https://images.unsplash.com/photo-1568600891621-2b5475d8b66c?auto=format&fit=crop&w=800&q=80',
+    'ing-falafel':
+        'https://images.unsplash.com/photo-1543353071-087092ec3937?auto=format&fit=crop&w=800&q=80',
+    'ing-houmous':
+        'https://images.unsplash.com/photo-1589307004173-3c95204b1f31?auto=format&fit=crop&w=800&q=80',
+    'ing-legumes-rotis':
+        'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80',
+    'ing-olives':
+        'https://images.unsplash.com/photo-1514516430032-7b090a252f95?auto=format&fit=crop&w=800&q=80',
+    'ing-bouillon-pho':
+        'https://images.unsplash.com/photo-1570183993633-4f98c0bbc9c3?auto=format&fit=crop&w=800&q=80',
+    'ing-nouilles-riz':
+        'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80',
+    'ing-boeuf-tranche':
+        'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',
+    'ing-pousses-soja':
+        'https://images.unsplash.com/photo-1506084868230-bb9d0524087e?auto=format&fit=crop&w=800&q=80',
+    'ing-herbes':
+        'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80',
+    'ing-pate-feuilletee':
+        'https://images.unsplash.com/photo-1514516430032-7b090a252f95?auto=format&fit=crop&w=800&q=80',
+    'ing-poire':
+        'https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=800&q=80',
+    'ing-sucre-blond':
+        'https://images.unsplash.com/photo-1505575967455-40e256f73376?auto=format&fit=crop&w=800&q=80',
+    'ing-beurre-demi-sel':
+        'https://images.unsplash.com/photo-1514516430032-7b090a252f95?auto=format&fit=crop&w=800&q=80',
+    'ing-mascarpone':
+        'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80',
 };
 
 export const fakeIngredients: Ingredient[] = [
@@ -310,13 +416,17 @@ export const fakeIngredients: Ingredient[] = [
     },
 ];
 
-const ingredientIndex = fakeIngredients.reduce<Record<string, Ingredient>>(
-    (acc, ingredient) => {
-        acc[ingredient.id] = ingredient;
-        return acc;
-    },
-    {},
-);
+const ingredientIndex = fakeIngredients.reduce<
+    Record<string, IngredientWithImage>
+>((acc, ingredient) => {
+    const imageUrl =
+        ingredientImages[ingredient.id] ?? DEFAULT_INGREDIENT_IMAGE;
+    acc[ingredient.id] = {
+        ...ingredient,
+        imageUrl,
+    };
+    return acc;
+}, {});
 
 const pivot = (
     recipeId: string,
@@ -364,7 +474,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-01-18T09:30:00Z'),
         createdById: 'user-chef-001',
         imageUrl:
-            'https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80',
+            'https://img.cuisineaz.com/1280x720/2015/08/24/i107965-lasagnes-boeuf-tomate-et-mozzarella.jpg',
         difficulty: 2,
         upvote: 863,
         ARDisplay: true,
@@ -418,7 +528,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-02-02T11:15:00Z'),
         createdById: 'user-chef-002',
         imageUrl:
-            'https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=1200&q=80',
+            'https://odelices.ouest-france.fr/images/recettes/risotto-champignons.jpg',
         difficulty: 3,
         upvote: 240,
         ARDisplay: false,
@@ -482,7 +592,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-03-09T08:45:00Z'),
         createdById: 'user-chef-003',
         imageUrl:
-            'https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=1200&q=80',
+            'https://florette.fr/wp-content/uploads/2024/08/Salade-cesar-Florette.jpg',
         difficulty: 1,
         upvote: 540,
         ARDisplay: true,
@@ -536,7 +646,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-03-21T17:05:00Z'),
         createdById: 'user-chef-001',
         imageUrl:
-            'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1200&q=80',
+            'https://couteaux-et-tirebouchons.com/wp-content/uploads/2016/11/Poulet-au-curry-vert-thai-au-lait-de-coco.jpeg',
         difficulty: 2,
         upvote: 412,
         ARDisplay: false,
@@ -590,7 +700,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-04-02T12:25:00Z'),
         createdById: 'user-chef-004',
         imageUrl:
-            'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=1200&q=80',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNDO8UOA9HjsHP9ihnZJXNCcdn2RBOUdP_dA&s',
         difficulty: 1,
         upvote: 329,
         ARDisplay: true,
@@ -644,7 +754,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-04-19T10:40:00Z'),
         createdById: 'user-chef-005',
         imageUrl:
-            'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1200&q=80',
+            'https://www.ilovelindsay.com/assets/components/phpthumbof/cache/recipe-shakthumb.f82724c758f5a7e1142cf0568b85d580.jpg',
         difficulty: 1,
         upvote: 198,
         ARDisplay: false,
@@ -859,8 +969,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         globalRate: 4,
         createdAt: new Date('2025-06-28T15:35:00Z'),
         createdById: 'user-chef-007',
-        imageUrl:
-            'https://images.unsplash.com/photo-1589308078055-91868ffb735b?auto=format&fit=crop&w=1200&q=80',
+        imageUrl: 'https://images.ricardocuisine.com/services/recipes/55.jpg',
         difficulty: 2,
         upvote: 451,
         ARDisplay: false,

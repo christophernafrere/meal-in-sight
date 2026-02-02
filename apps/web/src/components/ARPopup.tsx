@@ -2,6 +2,7 @@ import Popup from '@/layouts/popup';
 import { Button } from './button';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 // export default function ARPopup({ recipeId }: { recipeId: string }) {
 export default function ARPopup({
@@ -18,14 +19,21 @@ export default function ARPopup({
         );
     return (
         <Popup onClose={onClose}>
-            <p>Souhaitez vous visualiser la recette en Réalité Augmenté (AR)</p>
+            <Content>
+                <p>Suivre la recette en réalité augmentée</p>
 
-            <ButtonContianer>
-                <Button onClick={() => goTo('classique')}>
-                    Recette classique
-                </Button>
-                <Button onClick={() => goTo('AR')}>Recette AR</Button>
-            </ButtonContianer>
+                <ButtonContianer>
+                    <Button onClick={() => goTo('classique')}>Non</Button>
+                    <Button onClick={() => goTo('AR')}>Oui</Button>
+                </ButtonContianer>
+            </Content>
+
+            <Image
+                src="/AR-illu.png"
+                alt="AR Illustration"
+                width={400}
+                height={300}
+            />
         </Popup>
     );
 }
@@ -33,4 +41,25 @@ export default function ARPopup({
 const ButtonContianer = styled.div`
     display: flex;
     gap: 16px;
+    position: relative;
+`;
+
+const Content = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffffa6;
+    border-radius: 16px;
+    backdrop-filter: blur(2px);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 16px;
+    p {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
 `;

@@ -51,7 +51,7 @@ const PopupFrame = styled.div<{ width?: string; height?: string }>`
     ${({ width, height }) =>
         `
                 width: ${width || '80vw'};
-                height: ${height || '30vh'};
+                min-height: ${height || '30vh'};
             `}
     background-color: white;
     z-index: 1500;

@@ -60,10 +60,13 @@ export default function RecipeCard({
         }
     })();
 
+    const stackedTranslate = `${-50 - iteration * 3.8}%`;
+    const stackedScale = Math.max(0.8, 1 - iteration * 0.05);
+
     return (
         <RecipeCardContainer
-            imageUrl={imageUrl}
-            iteration={iteration}
+            $imageUrl={imageUrl}
+            $iteration={iteration}
             initial={{
                 opacity: 0,
                 translateX: '-50%',
@@ -73,8 +76,8 @@ export default function RecipeCard({
             animate={{
                 opacity: 1,
                 translateX: '-50%',
-                translateY: `${-50 - iteration * 3.8}%`,
-                scale: Math.max(0.8, 1 - iteration * 0.05),
+                translateY: stackedTranslate,
+                scale: stackedScale,
             }}
             exit={exitStyles}
             transition={{ duration: 0.2 }}
@@ -93,11 +96,11 @@ export default function RecipeCard({
 }
 
 const RecipeCardContainer = styled(motion.article)<{
-    iteration: number;
-    imageUrl: string;
+    $iteration: number;
+    $imageUrl: string;
 }>`
     display: flex;
-    flex-direction: center;
+    flex-direction: column;
     align-items: flex-end;
     width: 95%;
     height: 90%;
@@ -106,7 +109,7 @@ const RecipeCardContainer = styled(motion.article)<{
     top: 50%;
 
     /* 0 devant, 1 derrière, 2 encore derrière, ... */
-    z-index: ${({ iteration }) => 100 - iteration};
+    z-index: ${({ $iteration }) => 100 - $iteration};
 
     /* Pour éviter les surprises d'origine */
     transform-origin: center;
@@ -114,7 +117,7 @@ const RecipeCardContainer = styled(motion.article)<{
     border-radius: 18px;
     box-shadow: 0 4px 8px black;
     background-color: white;
-    background-image: url(${({ imageUrl }) => imageUrl});
+    background-image: url(${({ $imageUrl }) => $imageUrl});
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -132,11 +135,19 @@ const ARPins = styled.p`
 `;
 
 const DescriptionSection = styled.div`
+    position: absolute;
+    bottom: 0;
     width: 100%;
     height: 10%;
     color: white;
     padding: 8px 0;
-    background: linear-gradient(0deg, #000000, 33%, 66%, #000000);
+    box-sizing: border-box;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0)
+    );
     padding: 8px 24px;
     h2 {
         margin: 0;

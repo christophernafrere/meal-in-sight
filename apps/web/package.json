@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
+        "dev": "next dev --webpack",
+        "build": "next build --webpack",
         "start": "next start -p 3001",
         "lint": "eslint"
     },
@@ -14,16 +14,20 @@
         "lucide-react": "^0.563.0",
         "motion": "^12.29.2",
         "next": "16.0.0",
+        "next-pwa": "^5.6.0",
         "npm": "^11.8.0",
         "react": "19.2.0",
         "react-dom": "19.2.0",
-        "styled-components": "^6.1.19"
+        "styled-components": "^6.1.19",
+        "three": "^0.182.0"
     },
     "devDependencies": {
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
+        "@types/three": "^0.182.0",
         "babel-plugin-react-compiler": "1.0.0",
+        "baseline-browser-mapping": "latest",
         "eslint": "^9",
         "eslint-config-next": "16.0.0",
         "typescript": "^5"

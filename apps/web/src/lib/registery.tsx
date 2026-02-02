@@ -1,23 +1,28 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { useServerInsertedHTML } from "next/navigation";
-import { StyleRegistry, createStyleRegistry } from "styled-jsx";
+import { useServerInsertedHTML } from 'next/navigation';
+import { PropsWithChildren, useState } from 'react';
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
-export default function StyledJsxRegistry({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // Only create stylesheet once with lazy initial state
-  // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [jsxStyleRegistry] = useState(() => createStyleRegistry());
+// Collects styled-components styles during the server render and reuses them on the client.
+export default function StyledComponentsRegistry({
+    children,
+}: PropsWithChildren) {
+    const [styledComponentsSheet] = useState(() => new ServerStyleSheet());
 
-  useServerInsertedHTML(() => {
-    const styles = jsxStyleRegistry.styles();
-    jsxStyleRegistry.flush();
-    return <>{styles}</>;
-  });
+    useServerInsertedHTML(() => {
+        const styles = styledComponentsSheet.getStyleElement();
+        styledComponentsSheet.instance.clearTag();
+        return <>{styles}</>;
+    });
 
-  return <StyleRegistry registry={jsxStyleRegistry}>{children}</StyleRegistry>;
+    if (typeof window !== 'undefined') {
+        return <>{children}</>;
+    }
+
+    return (
+        <StyleSheetManager sheet={styledComponentsSheet.instance}>
+            {children}
+        </StyleSheetManager>
+    );
 }

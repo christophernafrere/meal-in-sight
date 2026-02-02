@@ -22,6 +22,10 @@ export default function ClassicRecipePage() {
     return (
         <Container>
             <ReturnButton href="/">&larr; Retour aux recettes</ReturnButton>
+            <ARRecipeButton href={`/recipe/${id}/augmented-reality`}>
+                Voir en Réalité Augmentée
+            </ARRecipeButton>
+
             <RecipeImage
                 src={
                     recipe?.imageUrl ??
@@ -41,28 +45,30 @@ export default function ClassicRecipePage() {
                 <IngredientList>
                     {recipe?.ingredients?.length ? (
                         recipe.ingredients.map((ingredient) => (
-                            <IngredientsCard key={ingredient.ingredientId} />
+                            <IngredientsCard
+                                key={ingredient.ingredientId}
+                                item={ingredient}
+                            />
                         ))
                     ) : (
                         <p>Aucun ingrédient disponible pour cette recette.</p>
                     )}
                 </IngredientList>
             </IngredientSection>
-
             <RecipeStepSection>
                 <h2>Étapes de la recette</h2>
                 {recipe?.steps?.length ? (
                     <StepList>
-                        {recipe.steps.map((step) => (
-                            <StepItem key={step.id}>
-                                <StepNumber>Étape {step.stepNumber}</StepNumber>
+                        {recipe.steps.map((step, index) => (
+                            <StepItem key={index}>
+                                <StepNumber>Étape {index + 1}</StepNumber>
                                 <StepDescription>
                                     {step.description}
                                 </StepDescription>
                                 {step.imageUrl && (
                                     <StepImage
                                         src={step.imageUrl}
-                                        alt={`Illustration de l'etape ${step.stepNumber}`}
+                                        alt={`Image de l'étape ${index + 1}`}
                                     />
                                 )}
                             </StepItem>
@@ -162,6 +168,24 @@ const ReturnButton = styled.a`
     color: #0070f3;
     text-decoration: none;
     font-weight: 500;
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
+const ARRecipeButton = styled.a`
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: inline-block;
+    margin-top: 1rem;
+    color: #0070f3;
+    text-decoration: none;
+    font-weight: 500;
+    background-color: #ffeaeacc;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     &:hover {
         text-decoration: underline;
     }

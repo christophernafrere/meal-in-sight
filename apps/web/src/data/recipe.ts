@@ -364,7 +364,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-01-18T09:30:00Z'),
         createdById: 'user-chef-001',
         imageUrl:
-            'https://images.unsplash.com/photo-1612874472078-15bd7aed7922?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80',
         difficulty: 2,
         upvote: 863,
         ARDisplay: true,
@@ -380,7 +380,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-lasagne-rustique',
                 1,
                 'Faire revenir oignon et boeuf jusqu a coloration.',
-                'https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80',
+                'https://images.unsplash.com/photo-1506084868230-bb9d95c24759?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-lasagne-rustique',
@@ -391,6 +391,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-lasagne-rustique',
                 3,
                 'Couvrir de mozzarella et cuire 25 minutes a 190°C.',
+                'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-lasagne-rustique',
@@ -401,6 +402,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-lasagne-rustique',
                 5,
                 'Servir avec basilic frais et salade croquante.',
+                'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
@@ -416,7 +418,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-02-02T11:15:00Z'),
         createdById: 'user-chef-002',
         imageUrl:
-            'https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=1200&q=80',
         difficulty: 3,
         upvote: 240,
         ARDisplay: false,
@@ -442,6 +444,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-risotto-sauvage',
                 1,
                 'Suer echalotes et riz dans une sauteuse avec huile dolive.',
+                'https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-risotto-sauvage',
@@ -452,7 +455,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-risotto-sauvage',
                 3,
                 'Incorporer champignons sautes, parmesan et huile de truffe.',
-                'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1200&q=80',
+                'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-risotto-sauvage',
@@ -463,6 +466,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-risotto-sauvage',
                 5,
                 'Servir immediatement dans des assiettes rechauffees.',
+                'https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
@@ -478,7 +482,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-03-09T08:45:00Z'),
         createdById: 'user-chef-003',
         imageUrl:
-            'https://images.unsplash.com/photo-1568600891621-2cc918b35a39?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=1200&q=80',
         difficulty: 1,
         upvote: 540,
         ARDisplay: true,
@@ -494,6 +498,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-salade-cesar',
                 1,
                 'Griller le poulet marine puis le couper en lamelles.',
+                'https://images.unsplash.com/photo-1514986888952-8cd320577b68?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-salade-cesar',
@@ -504,6 +509,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-salade-cesar',
                 3,
                 'Ajouter le poulet et napper de sauce cesar.',
+                'https://images.unsplash.com/photo-1525755664500-46e53ae66df7?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-salade-cesar',
@@ -514,6 +520,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-salade-cesar',
                 5,
                 'Servir avec copeaux de parmesan et citron.',
+                'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
@@ -529,7 +536,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-03-21T17:05:00Z'),
         createdById: 'user-chef-001',
         imageUrl:
-            'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1200&q=80',
         difficulty: 2,
         upvote: 412,
         ARDisplay: false,
@@ -545,6 +552,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-curry-vert',
                 1,
                 'Faire frire la pate de curry avec un filet d huile.',
+                'https://images.unsplash.com/photo-1612874471781-0834f6f2f282?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-curry-vert',
@@ -555,6 +563,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-curry-vert',
                 3,
                 'Incorporer legumes et basilic, cuire encore 5 minutes.',
+                'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-curry-vert',
@@ -565,6 +574,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-curry-vert',
                 5,
                 'Servir bien chaud avec riz jasmine.',
+                'https://images.unsplash.com/photo-1542444868-3f2048a0b5bd?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
@@ -580,7 +590,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-04-02T12:25:00Z'),
         createdById: 'user-chef-004',
         imageUrl:
-            'https://images.unsplash.com/photo-1528834352189-3c4d50f6c4e0?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=1200&q=80',
         difficulty: 1,
         upvote: 329,
         ARDisplay: true,
@@ -596,6 +606,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-tacos-poisson',
                 1,
                 'Paner le cabillaud et le frire jusqu a dorure.',
+                'https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-tacos-poisson',
@@ -606,6 +617,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-tacos-poisson',
                 3,
                 'Rechauffer tortillas, garnir de poisson, salsa et creme.',
+                'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-tacos-poisson',
@@ -616,6 +628,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-tacos-poisson',
                 5,
                 'Servir avec quartier de citron vert et sauce piqueante.',
+                'https://images.unsplash.com/photo-1525755664500-46e53ae66df7?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
@@ -631,7 +644,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-04-19T10:40:00Z'),
         createdById: 'user-chef-005',
         imageUrl:
-            'https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1200&q=80',
         difficulty: 1,
         upvote: 198,
         ARDisplay: false,
@@ -647,6 +660,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-shakshuka',
                 1,
                 'Cuire tomate et poivron avec les epices jusqu a reduction.',
+                'https://images.unsplash.com/photo-1593032465171-8ed95cc8f1d2?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-shakshuka',
@@ -657,6 +671,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-shakshuka',
                 3,
                 'Couvrir et cuire jusqu a coagulation des oeufs, parsemer de coriandre.',
+                'https://images.unsplash.com/photo-1612872087720-bb876e3a3fd6?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-shakshuka',
@@ -667,6 +682,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-shakshuka',
                 5,
                 'Servir avec pain pita legerement grille.',
+                'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
@@ -698,6 +714,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-ramen-miso',
                 1,
                 'Chauffer le bouillon miso avec mirin et sauce soja.',
+                'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-ramen-miso',
@@ -708,6 +725,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-ramen-miso',
                 3,
                 'Ajouter bouillon, chashu, oeuf marine et menma.',
+                'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-ramen-miso',
@@ -718,6 +736,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-ramen-miso',
                 5,
                 'Servir aussitot pour garder les nouilles souples.',
+                'https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
@@ -733,7 +752,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
         createdAt: new Date('2025-05-21T14:10:00Z'),
         createdById: 'user-chef-006',
         imageUrl:
-            'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80',
         difficulty: 2,
         upvote: 276,
         ARDisplay: false,
@@ -749,6 +768,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-buddha-bowl',
                 1,
                 'Cuire le quinoa puis le laisser tiedir avec citron et huile.',
+                'https://images.unsplash.com/photo-1604908177225-d7bad45d0f6c?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-buddha-bowl',
@@ -759,6 +779,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-buddha-bowl',
                 3,
                 'Ajouter houmous et olives pour servir.',
+                'https://images.unsplash.com/photo-1589307004173-3c95204b1f31?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-buddha-bowl',
@@ -769,6 +790,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-buddha-bowl',
                 5,
                 'Parsemer de graines de sesame et herbes fraiches.',
+                'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
@@ -800,6 +822,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-pho-bo',
                 1,
                 'Porter le bouillon pho a ebullition avec epices.',
+                'https://images.unsplash.com/photo-1604908177225-d7bad45d0f6c?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-pho-bo',
@@ -810,7 +833,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-pho-bo',
                 3,
                 'Verser le bouillon chaud et garnir de pousses et herbes.',
-                'https://images.unsplash.com/photo-1585036156171-3841641ccbd1?auto=format&fit=crop&w=1200&q=80',
+                'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-pho-bo',
@@ -821,6 +844,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-pho-bo',
                 5,
                 'Deguster tant que le bouillon est fumant.',
+                'https://images.unsplash.com/photo-1525755664500-46e53ae66df7?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
@@ -852,6 +876,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-tarte-tatin',
                 1,
                 'Carameliser sucre et beurre dans une poele allant au four.',
+                'https://images.unsplash.com/photo-1514516430032-7b090a252f95?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-tarte-tatin',
@@ -862,6 +887,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-tarte-tatin',
                 3,
                 'Cuire 30 minutes a 190°C puis servir avec mascarpone.',
+                'https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1200&q=80',
             ),
             createStep(
                 'rec-tarte-tatin',
@@ -872,6 +898,7 @@ export const fakeRecipes: RecipeWithIngredients[] = [
                 'rec-tarte-tatin',
                 5,
                 'Servir avec mascarpone fouette ou glace vanille.',
+                'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1200&q=80',
             ),
         ],
     },
